@@ -1,13 +1,73 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --mahogany: #221B12;
+  --mahogany-light: #3A2E1F;
+  --beige: #E6DCC6;
+  --beige-light: #F5F0E6;
+  --snooker-green: #1A432D;
+  --gold: #C5A059;
+  --red-accent: #8B2621;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  background-color: var(--mahogany);
+  color: var(--beige-light);
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Work Sans', sans-serif;
+  border: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-gold { background-color: var(--gold); color: var(--mahogany); padding: 10px 20px; font-weight: 600; }
+.btn-gold:hover { background-color: #d4af6a; }
+.btn-outline { background-color: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 20px; }
+.btn-outline:hover { background-color: rgba(197, 160, 89, 0.1); }
+.card { background-color: var(--beige); color: var(--mahogany); border-radius: 8px; overflow: hidden; }
+.snooker-section { background-color: var(--snooker-green); color: var(--beige-light); }
+/* --- RESPONSIVE MOBILE LAYOUT --- */
+@media (max-width: 768px) {
+  /* Layout adjustments */
+  .app-nav { padding: 15px 20px !important; }
+  .content-wrapper { padding: 0 20px !important; }
+  .section { padding: 40px 0 !important; }
+  .footer { padding: 40px 20px !important; }
+  
+  /* Typography scaling */
+  .hero-title { font-size: 2.8rem !important; }
+  .section-title { font-size: 2rem !important; }
+  
+  /* Navigation toggles */
+  .desktop-nav { display: none !important; }
+  .mobile-menu-btn { display: block !important; }
+  
+  /* Cart sidebar */
+  .cart-sidebar { width: 100% !important; }
+  
+  /* Feature grids */
+  .specials-grid, .features-grid, .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-btn { display: none !important; }
+  .mobile-menu-dropdown { display: none !important; }
 }
