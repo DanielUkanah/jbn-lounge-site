@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingCart, MapPin, Phone, Utensils, Wine, Target, Clock, Music, Star, Truck, Menu as MenuIcon, X } from 'lucide-react';
+import { ShoppingCart, MapPin, Phone, Utensils, Wine, Target, Clock, Music, Truck, Menu as MenuIcon, X } from 'lucide-react';
 import FoodMenu from './components/FoodMenu';
 import SnookerLounge from './components/SnookerLounge';
 
