@@ -48,10 +48,22 @@ function App() {
           
           <div style={styles.heroButtons}>
             <button className="btn-gold" onClick={() => navigateTo('menu')}>View Full Menu</button>
-            <button className="btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            
+            {/* Get Directions - Opens Google Maps in a new tab */}
+            <button 
+              className="btn-outline" 
+              onClick={() => window.open('https://www.google.com/maps/search/?api=1&query=First+Mechanic,+Rumuekini,+Port+Harcourt', '_blank')}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
                 <MapPin size={18} /> Get Directions
             </button>
-            <button className="btn-gold" style={{ backgroundColor: 'var(--snooker-green)', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            
+            {/* Call Now - Triggers the phone's native dialer */}
+            <button 
+              className="btn-gold" 
+              onClick={() => window.location.href = 'tel:+2349028828989'}
+              style={{ backgroundColor: 'var(--snooker-green)', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
                 <Phone size={18} /> Call Now
             </button>
           </div>
