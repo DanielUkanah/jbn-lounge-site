@@ -52,6 +52,11 @@ const SnookerLounge = () => {
       setDate('');
       
       // TODO: Email Notification Logic goes here!
+      // Add this inside your handleBooking function, right after the success message:
+
+      // 5. Trigger automatic WhatsApp notification to the owner
+        const whatsappMessage = `Hello! New Snooker Booking:%0A- Name: ${name}%0A- Date: ${date}%0A- Time: ${time}`;
+        window.open(`https://wa.me/2349031859655?text=${whatsappMessage}`, '_blank');
 
     } catch (error) {
       console.error("Error writing to database: ", error);
