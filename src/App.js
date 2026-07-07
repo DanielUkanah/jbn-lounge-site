@@ -46,7 +46,7 @@ function App() {
         <div style={styles.heroOverlay}></div>
         <div style={styles.heroContent}>
           <h1 className="hero-title" style={styles.heroTitle}>GOOD FOOD. COLD <br/>DRINKS. GOOD VIBES.</h1>
-          <p style={styles.heroSubtitle}>Premium Lounge · First Machine, Rumuekini, Port Harcourt</p>
+          <p style={styles.heroSubtitle}>Premium Lounge · First Mechanic, Rumuekini, Port Harcourt</p>
           
           <div style={styles.heroButtons}>
             <button className="btn-gold" onClick={() => navigateTo('menu')}>View Full Menu</button>
@@ -240,27 +240,70 @@ function App() {
         {currentView === 'gallery' && renderGallery()}
       </main>
 
+      {/* --- WHATSAPP FLOATING BUTTON --- */}
+      <a 
+        href="https://wa.me/2349028828989?text=Hello%20JBN%20Lounge!%20I%20would%20like%20to%20make%20an%20inquiry." 
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{
+          position: 'fixed',
+          bottom: '30px',
+          right: '30px',
+          backgroundColor: '#25D366',
+          color: 'white',
+          width: '60px',
+          height: '60px',
+          borderRadius: '50%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+          zIndex: 9999,
+          cursor: 'pointer',
+          textDecoration: 'none'
+        }}
+      >
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.031 0C5.397 0 0 5.39 0 12.012c0 2.122.553 4.195 1.605 6.02L.2 23.47l5.59-1.46c1.765 1.002 3.774 1.53 5.84 1.53 6.634 0 12.03-5.39 12.03-12.013C23.66 5.385 18.265 0 12.031 0zM17.84 16.51c-.266.745-1.532 1.433-2.115 1.517-.55.078-1.25.138-3.52-.806-2.735-1.137-4.49-3.92-4.62-4.1-.13-.178-1.106-1.464-1.106-2.793 0-1.328.69-1.986.937-2.25.247-.267.534-.336.713-.336.18 0 .357 0 .504.006.16.007.375-.062.585.443.267.643.957 2.33 1.043 2.508.086.177.143.385.027.62-.116.236-.175.385-.35.586-.178.2-.366.425-.515.57-.16.155-.327.324-.145.635.182.31 8.1 1.42 1.157 2.063.346.642.846 1.114 1.442 1.41.597.297.948.248 1.306-.153.357-.402 1.53-1.782 1.942-2.396.41-.613.82-.514 1.41-.295.592.218 3.738 1.76 4.382 2.08.643.32 1.07.478 1.226.743.156.266.156 1.543-.11 2.288z"/>
+        </svg>
+      </a>
+
       {/* --- FOOTER --- */}
       <footer className="footer" style={styles.footer}>
         <div className="footer-grid" style={styles.footerGrid}>
           <div>
             <div style={{ marginBottom: '15px' }}>
-              <img src="/images/1000256672_2.jpg" alt="JBN Lounge" style={{ height: '60px', mixBlendMode: 'lighten' }} />
+              <img src="/images/logo.jpg" alt="JBN Lounge" style={{ height: '60px', mixBlendMode: 'lighten' }} />
             </div>
-            <p style={styles.footerText}>First Machine, Rumuekini<br/>Port Harcourt, Rivers State<br/>Nigeria</p>
+            <p style={styles.footerText}>First Mechanic, Rumuekini<br/>Port Harcourt, Rivers State<br/>Nigeria</p>
           </div>
-          <div>
-            <h4 style={styles.footerHeading}>Contact Us</h4>
+          
+          {/* Contact & Location Map */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <h4 style={styles.footerHeading}>Contact & Location</h4>
             <p style={styles.footerText}><Phone size={14} style={{marginRight: '8px', verticalAlign: 'middle'}}/> 0902 882 8989</p>
-            <p style={styles.footerText}>contact@jbnlounge.com</p>
+            
+            {/* Live Google Map Iframe (Temporary General Location) */}
+            <div style={{ width: '100%', height: '150px', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(197, 160, 89, 0.3)' }}>
+              <iframe 
+                src="https://maps.google.com/maps?q=Rumuekini,%20Port%20Harcourt&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="JBN Lounge Location"
+              ></iframe>
+            </div>
           </div>
-          <div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
             <h4 style={styles.footerHeading}>Opening Hours</h4>
             <p style={styles.footerText}>Mon - Thu: 10:00 AM - 12:00 AM</p>
             <p style={styles.footerText}>Fri - Sun: 10:00 AM - 2:00 AM</p>
-          </div>
-          <div>
-            <h4 style={styles.footerHeading}>Follow Us</h4>
+            
+            <h4 style={{ ...styles.footerHeading, marginTop: '10px' }}>Follow Us</h4>
             <div style={{ display: 'flex', gap: '15px', color: 'var(--beige-light)' }}>
               <Instagram />
               <Facebook />
@@ -312,8 +355,8 @@ const styles = {
   
   footer: { backgroundColor: 'var(--mahogany-light)', padding: '60px 50px 20px', borderTop: '2px solid rgba(197, 160, 89, 0.1)' },
   footerGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', maxWidth: '1400px', margin: '0 auto', paddingBottom: '40px' },
-  footerHeading: { color: 'var(--beige-light)', fontSize: '1.2rem', marginBottom: '20px', fontFamily: 'Playfair Display' },
-  footerText: { color: '#D8CBB8', marginBottom: '10px', fontSize: '0.95rem', lineHeight: '1.6' },
+  footerHeading: { color: 'var(--beige-light)', fontSize: '1.2rem', marginBottom: '0', fontFamily: 'Playfair Display' },
+  footerText: { color: '#D8CBB8', margin: '0', fontSize: '0.95rem', lineHeight: '1.6' },
   footerBottom: { textAlign: 'center', paddingTop: '20px', borderTop: '1px solid rgba(197, 160, 89, 0.2)', color: '#D8CBB8', fontSize: '0.85rem' }
 };
 
