@@ -1,40 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const menuItems = [
-  { id: 1, name: 'Fisherman Soup', price: 4500, image: '/images/fisherman.jpg', desc: 'Fresh seafood, periwinkles, and native spice in a rich broth.' },
-  { id: 2, name: 'Isiewu', price: 4500, image: '/images/isiewu.jpg', desc: 'Traditional spicy peppered goat head delicacy.' },
-  { id: 3, name: 'Jollof & Grilled Chicken', price: 3500, image: '/images/jollof.jpg', desc: 'Smoky party jollof served with wood-fired chicken thigh.' },
-  { id: 4, name: 'Bush Meat Pepper Soup', price: 5000, image: '/images/bushmeat.jpg', desc: 'Hot, spicy, and perfectly seasoned for the rainy season.' },
-];
+const FoodMenu = ({ addToCart }) => {
+  const [activeCategory, setActiveCategory] = useState('Food');
 
-export default function FoodMenu({ addToCart }) {
+  // --- MENU DATA (No Prices) ---
+  const menuData = {
+    Food: [
+      { id: 'f1', name: 'Isiewu Special' },
+      { id: 'f2', name: 'Asun (Spicy Goat Meat)' },
+      { id: 'f3', name: 'Catfish Pepper Soup' },
+      { id: 'f4', name: 'Grilled Croaker Fish & Yam Chips' },
+      { id: 'f5', name: 'Jollof Rice with Grilled Turkey' },
+      { id: 'f6', name: 'Spicy Chicken Wings (6pcs)' }
+    ],
+    Drinks: [
+      { id: 'd1', name: 'Hennessy VSOP' },
+      { id: 'd2', name: 'Moët & Chandon Imperial' },
+      { id: 'd3', name: 'Heineken (Chilled)' },
+      { id: 'd4', name: 'Guinness Stout' },
+      { id: 'd5', name: 'Red Bull Energy Drink' },
+      { id: 'd6', name: 'Fresh Pineapple Juice' }
+    ],
+    Extras: [
+      { id: 'e1', name: 'Extra Portion of Plantain' },
+      { id: 'e2', name: 'Portion of Fries' },
+      { id: 'e3', name: 'Extra Turkey' },
+      { id: 'e4', name: 'Bottled Water' }
+    ]
+  };
+
   return (
-    <div id="menu" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <h2 style={{ fontSize: '3rem', marginBottom: '10px' }}>Food Menu</h2>
-        <p style={{ color: '#D8CBB8' }}>Local delicacies, made fresh, plated the way you'd want at your own table.</p>
+    <div style={styles.container}>
+      <div style={styles.header}>
+        <h2 style={styles.title}>Lounge Menu</h2>
+        <p style={styles.subtitle}>Select items to add to your order list, then checkout via WhatsApp.</p>
       </div>
 
+      {/* --- CATEGORY TABS --- */}
+      <div style={styles.tabContainer}>
+        {Object.keys(menuData).map(category => (
+          <button 
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            style={{
+              ...styles.tabButton,
+              backgroundColor: activeCategory === category ? 'var(--gold)' : 'transparent',
+              color: activeCategory === category ? 'var(--mahogany)' : 'var(--beige-light)',
+              border: activeCategory === category ? '1px solid var(--gold)' : '1px solid rgba(197, 160, 89, 0.3)'
+            }}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {/* --- MENU GRID --- */}
       <div style={styles.grid}>
-        {menuItems.map(item => (
-          <div key={item.id} className="card" style={styles.card}>
-            
-            {/* THIS IS WHERE YOUR IMAGE GOES */}
-            <img 
-              src={item.image} 
-              alt={item.name} 
-              style={styles.cardImage} 
-              onError={(e) => { e.target.src = 'https://via.placeholder.com/400x200?text=JBN+Lounge' }} 
-            />
-            
-            <div style={styles.cardBody}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
-                <h3 style={{ color: 'var(--mahogany)', fontSize: '1.2rem', margin: 0 }}>{item.name}</h3>
-                <span style={styles.price}>₦{item.price.toLocaleString()}</span>
-              </div>
-              <p style={styles.desc}>{item.desc}</p>
-              <button className="btn-gold" style={{ width: '100%', marginTop: '15px' }} onClick={() => addToCart(item)}>
-                Add to Cart
+        {menuData[activeCategory].map(item => (
+          <div key={item.id} style={styles.card}>
+            <div style={styles.cardContent}>
+              <h3 style={styles.itemName}>{item.name}</h3>
+              <button 
+                onClick={() => addToCart(item)}
+                style={styles.addButton}
+              >
+                + Add to Order
               </button>
             </div>
           </div>
@@ -42,13 +72,23 @@ export default function FoodMenu({ addToCart }) {
       </div>
     </div>
   );
-}
-
-const styles = {
-  grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' },
-  card: { display: 'flex', flexDirection: 'column', border: '1px solid rgba(0,0,0,0.1)' },
-  cardImage: { width: '100%', height: '220px', objectFit: 'cover', borderBottom: '1px solid rgba(0,0,0,0.05)' },
-  cardBody: { padding: '25px', display: 'flex', flexDirection: 'column', flexGrow: 1 },
-  price: { fontWeight: 'bold', color: 'var(--snooker-green)', fontSize: '1.1rem' },
-  desc: { fontSize: '14px', color: '#5b5140', flexGrow: 1, lineHeight: '1.5' }
 };
+
+// --- INLINE STYLES ---
+const styles = {
+  container: { padding: '40px 0', minHeight: '60vh' },
+  header: { textAlign: 'center', marginBottom: '40px' },
+  title: { fontSize: '3rem', color: 'var(--gold)', fontFamily: 'Playfair Display', marginBottom: '10px' },
+  subtitle: { color: '#D8CBB8', fontSize: '1.1rem' },
+  
+  tabContainer: { display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '40px', flexWrap: 'wrap' },
+  tabButton: { padding: '10px 25px', borderRadius: '30px', fontSize: '1.1rem', cursor: 'pointer', transition: 'all 0.3s ease', outline: 'none' },
+  
+  grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' },
+  card: { backgroundColor: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(197, 160, 89, 0.2)', borderRadius: '10px', padding: '20px', transition: 'transform 0.2s', display: 'flex', flexDirection: 'column', justifyContent: 'center' },
+  cardContent: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '15px' },
+  itemName: { color: 'var(--beige-light)', fontSize: '1.2rem', margin: 0, flex: 1 },
+  addButton: { backgroundColor: 'var(--gold)', color: 'var(--mahogany)', border: 'none', padding: '8px 15px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', whiteSpace: 'nowrap' }
+};
+
+export default FoodMenu;

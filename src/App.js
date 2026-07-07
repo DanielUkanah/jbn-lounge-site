@@ -25,8 +25,6 @@ function App() {
     setIsCartOpen(true);
   };
 
-  const cartTotal = cart.reduce((total, item) => total + item.price, 0);
-
   const navigateTo = (view) => {
     setCurrentView(view);
     setIsMobileMenuOpen(false); // Close mobile menu when navigating
@@ -34,9 +32,9 @@ function App() {
   };
 
   const specials = [
-    { id: 101, name: 'Isiewu', price: 4500, image: '/images/isiewu.jpg' },
-    { id: 102, name: 'Grilled Chicken', price: 4500, image: '/images/jollof.jpg' },
-    { id: 103, name: 'Asun Special', price: 4500, image: '/images/bushmeat.jpg' },
+    { id: 101, name: 'Isiewu', image: '/images/isiewu.jpg' },
+    { id: 102, name: 'Grilled Chicken', image: '/images/jollof.jpg' },
+    { id: 103, name: 'Asun Special', image: '/images/bushmeat.jpg' },
   ];
 
   // --- HOME PAGE COMPONENT ---
@@ -61,15 +59,16 @@ function App() {
       </section>
 
       <div className="content-wrapper" style={styles.contentWrapper}>
+        
+        {/* TODAY'S SPECIALS (Prices Removed) */}
         <section className="section" style={styles.section}>
           <h2 className="section-title" style={styles.sectionTitle}>Today's Specials</h2>
           <div className="specials-grid" style={styles.specialsGrid}>
             {specials.map(item => (
               <div key={item.id} style={styles.specialCard}>
                 <img src={item.image} alt={item.name} style={styles.specialImg} onError={(e) => { e.target.src = 'https://via.placeholder.com/300x200?text=Special' }} />
-                <div style={{ padding: '15px' }}>
-                  <h3 style={{ color: 'var(--mahogany)', fontSize: '1.2rem', marginBottom: '5px' }}>{item.name}</h3>
-                  <p style={{ color: 'var(--mahogany)', fontWeight: 'bold', fontSize: '1.1rem' }}>₦{item.price}</p>
+                <div style={{ padding: '20px', textAlign: 'center' }}>
+                  <h3 style={{ color: 'var(--mahogany)', fontSize: '1.4rem', margin: 0 }}>{item.name}</h3>
                 </div>
               </div>
             ))}
@@ -193,28 +192,33 @@ function App() {
         </div>
       )}
 
-      {/* --- CART SIDEBAR --- */}
+      {/* --- CART SIDEBAR (Prices & Totals Removed) --- */}
       {isCartOpen && (
         <div className="cart-sidebar" style={styles.cartSidebar}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-            <h3>Your Order</h3>
+            <h3>Your Order List</h3>
             <button onClick={() => setIsCartOpen(false)} style={{ background: 'none', border: 'none', fontSize: '20px', color: 'var(--mahogany)', cursor: 'pointer' }}>X</button>
           </div>
-          {cart.length === 0 ? <p style={{ fontStyle: 'italic' }}>Cart is empty</p> : (
+          
+          {cart.length === 0 ? <p style={{ fontStyle: 'italic' }}>Your list is empty</p> : (
             <div style={{ flexGrow: 1, overflowY: 'auto' }}>
               {cart.map((item, index) => (
                 <div key={index} style={styles.cartItem}>
-                  <span>{item.name}</span>
-                  <span style={{color: 'var(--snooker-green)', fontWeight: 'bold'}}>₦{item.price}</span>
+                  <span style={{ fontSize: '1.1rem' }}>{item.name}</span>
                 </div>
               ))}
             </div>
           )}
+          
           <div style={{ borderTop: '2px solid rgba(0,0,0,0.1)', paddingTop: '20px', marginTop: 'auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.4rem' }}>
-              <strong>Total:</strong> <strong>₦{cartTotal}</strong>
-            </div>
-            <button className="btn-gold" style={{ width: '100%', marginTop: '20px' }}>Checkout</button>
+            <a 
+              href={`https://wa.me/2349028828989?text=Hello%20JBN%20Lounge!%20I%20would%20like%20to%20order:%0A${cart.map(i => '- ' + i.name).join('%0A')}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none' }}
+            >
+              <button className="btn-gold" style={{ width: '100%' }}>Send Order via WhatsApp</button>
+            </a>
           </div>
         </div>
       )}
@@ -283,7 +287,7 @@ function App() {
             <h4 style={styles.footerHeading}>Contact & Location</h4>
             <p style={styles.footerText}><Phone size={14} style={{marginRight: '8px', verticalAlign: 'middle'}}/> 0902 882 8989</p>
             
-            {/* Live Google Map Iframe (Temporary General Location) */}
+            {/* Live Google Map Iframe (Rumuekini General Area) */}
             <div style={{ width: '100%', height: '150px', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(197, 160, 89, 0.3)' }}>
               <iframe 
                 src="https://maps.google.com/maps?q=Rumuekini,%20Port%20Harcourt&t=&z=14&ie=UTF8&iwloc=&output=embed" 
@@ -312,7 +316,7 @@ function App() {
           </div>
         </div>
         <div style={styles.footerBottom}>
-          <p>&copy; 2026 JBN Lounge. All Rights Reserved.</p>
+          <p>© 2026 JBN Lounge. All Rights Reserved.</p>
         </div>
       </footer>
     </div>
