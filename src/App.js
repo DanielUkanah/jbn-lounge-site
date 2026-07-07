@@ -27,7 +27,7 @@ function App() {
 
   const navigateTo = (view) => {
     setCurrentView(view);
-    setIsMobileMenuOpen(false); // Close mobile menu when navigating
+    setIsMobileMenuOpen(false); 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -49,7 +49,7 @@ function App() {
           <div style={styles.heroButtons}>
             <button className="btn-gold" onClick={() => navigateTo('menu')}>View Full Menu</button>
             
-            {/* Get Directions - Opens Google Maps in a new tab */}
+            {/* Get Directions - Functional link to Rumuekini area */}
             <button 
               className="btn-outline" 
               onClick={() => window.open('https://www.google.com/maps/search/?api=1&query=First+Mechanic,+Rumuekini,+Port+Harcourt', '_blank')}
@@ -58,10 +58,10 @@ function App() {
                 <MapPin size={18} /> Get Directions
             </button>
             
-            {/* Call Now - Triggers the phone's native dialer */}
+            {/* Call Now - Updated to 0903 185 9655 */}
             <button 
               className="btn-gold" 
-              onClick={() => window.location.href = 'tel:+2349028828989'}
+              onClick={() => window.location.href = 'tel:+2349031859655'}
               style={{ backgroundColor: 'var(--snooker-green)', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}
             >
                 <Phone size={18} /> Call Now
@@ -72,7 +72,7 @@ function App() {
 
       <div className="content-wrapper" style={styles.contentWrapper}>
         
-        {/* TODAY'S SPECIALS (Prices Removed) */}
+        {/* TODAY'S SPECIALS */}
         <section className="section" style={styles.section}>
           <h2 className="section-title" style={styles.sectionTitle}>Today's Specials</h2>
           <div className="specials-grid" style={styles.specialsGrid}>
@@ -156,7 +156,6 @@ function App() {
     <div className="app-container">
       {/* --- NAVIGATION --- */}
       <nav className="app-nav" style={styles.nav}>
-        {/* LOGO */}
         <div style={styles.logo} onClick={() => navigateTo('home')}>
           <img 
             src="/images/logo.jpg" 
@@ -165,7 +164,6 @@ function App() {
           />
         </div>
         
-        {/* DESKTOP LINKS */}
         <div className="desktop-nav" style={styles.navLinks}>
           <button style={{ ...styles.navBtn, color: currentView === 'home' ? 'var(--gold)' : 'var(--beige-light)' }} onClick={() => navigateTo('home')}>Home</button>
           <button style={{ ...styles.navBtn, color: currentView === 'menu' ? 'var(--gold)' : 'var(--beige-light)' }} onClick={() => navigateTo('menu')}>Menus</button>
@@ -175,7 +173,6 @@ function App() {
           <button className="btn-gold" onClick={() => navigateTo('menu')} style={{ padding: '8px 16px', fontSize: '14px' }}>Order Food</button>
         </div>
 
-        {/* CART & MOBILE HAMBURGER */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <div style={styles.cartBtn} onClick={() => setIsCartOpen(!isCartOpen)}>
             <ShoppingCart color="#C5A059" size={24} />
@@ -204,7 +201,7 @@ function App() {
         </div>
       )}
 
-      {/* --- CART SIDEBAR (Prices & Totals Removed) --- */}
+      {/* --- CART SIDEBAR (WhatsApp Updated) --- */}
       {isCartOpen && (
         <div className="cart-sidebar" style={styles.cartSidebar}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
@@ -224,7 +221,7 @@ function App() {
           
           <div style={{ borderTop: '2px solid rgba(0,0,0,0.1)', paddingTop: '20px', marginTop: 'auto' }}>
             <a 
-              href={`https://wa.me/2349028828989?text=Hello%20JBN%20Lounge!%20I%20would%20like%20to%20order:%0A${cart.map(i => '- ' + i.name).join('%0A')}`} 
+              href={`https://wa.me/2349031859655?text=Hello%20JBN%20Lounge!%20I%20would%20like%20to%20order:%0A${cart.map(i => '- ' + i.name).join('%0A')}`} 
               target="_blank" 
               rel="noopener noreferrer"
               style={{ textDecoration: 'none' }}
@@ -256,9 +253,9 @@ function App() {
         {currentView === 'gallery' && renderGallery()}
       </main>
 
-      {/* --- WHATSAPP FLOATING BUTTON --- */}
+      {/* --- WHATSAPP FLOATING BUTTON (Updated Number) --- */}
       <a 
-        href="https://wa.me/2349028828989?text=Hello%20JBN%20Lounge!%20I%20would%20like%20to%20make%20an%20inquiry." 
+        href="https://wa.me/2349031859655?text=Hello%20JBN%20Lounge!%20I%20would%20like%20to%20make%20an%20inquiry." 
         target="_blank" 
         rel="noopener noreferrer"
         style={{
@@ -284,7 +281,7 @@ function App() {
         </svg>
       </a>
 
-      {/* --- FOOTER --- */}
+      {/* --- FOOTER (Updated Number) --- */}
       <footer className="footer" style={styles.footer}>
         <div className="footer-grid" style={styles.footerGrid}>
           <div>
@@ -294,12 +291,10 @@ function App() {
             <p style={styles.footerText}>First Mechanic, Rumuekini<br/>Port Harcourt, Rivers State<br/>Nigeria</p>
           </div>
           
-          {/* Contact & Location Map */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
             <h4 style={styles.footerHeading}>Contact & Location</h4>
-            <p style={styles.footerText}><Phone size={14} style={{marginRight: '8px', verticalAlign: 'middle'}}/> 0902 882 8989</p>
+            <p style={styles.footerText}><Phone size={14} style={{marginRight: '8px', verticalAlign: 'middle'}}/> 0903 185 9655</p>
             
-            {/* Live Google Map Iframe (Rumuekini General Area) */}
             <div style={{ width: '100%', height: '150px', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(197, 160, 89, 0.3)' }}>
               <iframe 
                 src="https://maps.google.com/maps?q=Rumuekini,%20Port%20Harcourt&t=&z=14&ie=UTF8&iwloc=&output=embed" 
